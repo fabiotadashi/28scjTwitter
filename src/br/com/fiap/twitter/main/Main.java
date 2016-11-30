@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import br.com.fiap.twitter.config.ConfiguraAcesso;
+import br.com.fiap.twitter.entidade.RelatorioTwitter;
 import twitter4j.Query;
 import twitter4j.QueryResult;
 import twitter4j.Status;
@@ -24,12 +25,17 @@ public class Main {
 		
 		String hashtag = "#java";
 		
+		RelatorioTwitter relatorioTwitter = new RelatorioTwitter(hashtag);
+		
 		Query query = new Query(hashtag);
 		// query.setCount(100);
 		query.setSince(dataInicial.format(formatador));
 		query.setUntil(dataFinal.format(formatador));
 		try {
 			QueryResult result = twitter.search(query);
+			
+			relatorioTwitter.setQtdTweets(result.getTweets().size());
+			
 			for (Status status : result.getTweets()) {
 				System.out.println("Data: " + status.getCreatedAt());
 				System.out.println("Qtde: " + status.getRetweetCount());

@@ -6,7 +6,11 @@ import twitter4j.TwitterException;
 public class RelatorioTwitter {
 
   private int qtdTweets;
+  private final String hashtag;
   
+  public RelatorioTwitter(String hashtag) {
+    this.hashtag = hashtag;
+  }
   public int getQtdTweets() {
     return qtdTweets;
   }
@@ -14,7 +18,7 @@ public class RelatorioTwitter {
     this.qtdTweets = qtdTweets;
   }
   
-  public void enviarRelatorio(Twitter twitter, String hashtag) throws TwitterException{
+  public void enviarRelatorio(Twitter twitter) throws TwitterException{
     String professorId = "";
     // descomentar o código abaixo quando tudo estiver ok
     // professorId = "@michelpf"
