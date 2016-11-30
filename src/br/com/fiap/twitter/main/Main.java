@@ -21,10 +21,9 @@ public class Main {
 		
 		DateTimeFormatter formatador = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-		System.out.println("Data de parâmetro: "+ dataInicial.format(formatador) + " até "+dataFinal.format(formatador));
 		
 		String hashtag = "#javaOne";
-		
+    		
 		RelatorioTwitter relatorioTwitter = new RelatorioTwitter(hashtag);
 		
 		Query query = new Query(hashtag);
@@ -51,6 +50,8 @@ public class Main {
 			  */
 			}
 			
+			System.out.println("Hashtag buscada: "+ hashtag);
+			System.out.println("Data de parâmetro: "+ dataInicial.format(formatador) + " até "+dataFinal.format(formatador));
 			System.out.println("Tweets por dia de semana: "+ relatorioTwitter.getQtdTweetDia().toString());
 			
 		} catch (Exception e) {
