@@ -12,6 +12,8 @@ public class RelatorioTwitter {
   private final String hashtag;
   private int qtdTotalTweets;
   private Map<DayOfWeek, Integer> qtdTweetDia = new HashMap<>();
+  private Map<DayOfWeek, Integer> qtdRetweetDia = new HashMap<>();
+  private Map<DayOfWeek, Integer> qtdFavDia = new HashMap<>();
   
   public RelatorioTwitter(String hashtag) {
     this.hashtag = hashtag;
@@ -31,7 +33,29 @@ public class RelatorioTwitter {
   }
 
   public Map<DayOfWeek, Integer> getQtdTweetDia() {
-    return qtdTweetDia;
+    return
+        qtdTweetDia;
+  }  
+  public void adicionarRetweetPorDia(DayOfWeek dayOfWeek, int qtd){
+    if(getQtdRetweetDia().get(dayOfWeek) != null){
+      qtd += getQtdRetweetDia().get(dayOfWeek);
+    }
+    getQtdRetweetDia().put(dayOfWeek,  + qtd);
+  }
+
+  public Map<DayOfWeek, Integer> getQtdRetweetDia() {
+    return qtdRetweetDia;
+  }  
+  
+  public void adicionarFavPorDia(DayOfWeek dayOfWeek, int qtd){
+    if(getQtdFavDia().get(dayOfWeek) != null){
+      qtd += getQtdFavDia().get(dayOfWeek);
+    }
+    getQtdFavDia().put(dayOfWeek,  + qtd);
+  }
+
+  public Map<DayOfWeek, Integer> getQtdFavDia() {
+    return qtdFavDia;
   }
   
   

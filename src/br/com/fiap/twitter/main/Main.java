@@ -39,6 +39,8 @@ public class Main {
 			  
 			  LocalDateTime dataTweet = LocalDateTime.ofInstant(status.getCreatedAt().toInstant(), ZoneId.systemDefault());
 			  relatorioTwitter.adicionarTweetPorDia(dataTweet.getDayOfWeek(), 1);
+			  relatorioTwitter.adicionarRetweetPorDia(dataTweet.getDayOfWeek(), status.getRetweetCount());
+			  relatorioTwitter.adicionarFavPorDia(dataTweet.getDayOfWeek(), status.getFavoriteCount());
 			  
 				/*
 				System.out.println("Data: " + status.getCreatedAt());
@@ -53,6 +55,8 @@ public class Main {
 			System.out.println("Hashtag buscada: "+ hashtag);
 			System.out.println("Data de parâmetro: "+ dataInicial.format(formatador) + " até "+dataFinal.format(formatador));
 			System.out.println("Tweets por dia de semana: "+ relatorioTwitter.getQtdTweetDia().toString());
+			System.out.println("Retweets por dia de semana: "+ relatorioTwitter.getQtdRetweetDia().toString());
+			System.out.println("Favoritações por dia de semana: "+ relatorioTwitter.getQtdFavDia().toString());
 			
 		} catch (Exception e) {
 			System.out.println("Erro ao efetuar a busca!!!");
