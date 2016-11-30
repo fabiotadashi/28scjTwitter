@@ -9,6 +9,12 @@ public class RelatorioTwitter {
   private int qtdRetweets;
   private int qtdFavoritacoes;
   
+  public int getQtdTweets() {
+    return qtdTweets;
+  }
+  public void setQtdTweets(int qtdTweets) {
+    this.qtdTweets = qtdTweets;
+  }
   public int getQtdRetweets() {
     return qtdRetweets;
   }
@@ -26,7 +32,7 @@ public class RelatorioTwitter {
     String professorId = "";
     // descomentar o código abaixo quando tudo estiver ok
     // professorId = "@michelpf"
-    twitter.updateStatus(professorId+" - Tag: "+ hashtag+", qtd tweets: "+qtdTweets+", qtd re-tweets: "+qtdRetweets+", qtd favoritações: "+qtdFavoritacoes);
+    twitter.updateStatus(professorId+" - Tag: "+ hashtag+", qtd tweets: "+qtdTweets+", qtd re-tweets: "+qtdRetweets+", qtd favoritações: "+qtdFavoritacoes+" na ultima semana");
   }
   
 }
