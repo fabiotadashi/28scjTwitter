@@ -21,8 +21,10 @@ public class Main {
 
 		System.out.println(dataInicial.format(formatador));
 		System.out.println(dataFinal.format(formatador));
-
-		Query query = new Query("#java");
+		
+		String hashtag = "#java";
+		
+		Query query = new Query(hashtag);
 		// query.setCount(100);
 		query.setSince(dataInicial.format(formatador));
 		query.setUntil(dataFinal.format(formatador));
@@ -32,7 +34,7 @@ public class Main {
 				System.out.println("Data: " + status.getCreatedAt());
 				System.out.println("Qtde: " + status.getRetweetCount());
 				System.out.println("Qtde Retweet: " + status.getRetweetCount());
-				System.out.println("Qtde Favoritação: " + status.getFavoriteCount());
+				System.out.println("Qtde Favoritaï¿½ï¿½o: " + status.getFavoriteCount());
 				System.out.println("Qtde Nome: " + status.getUser());
 				System.out.println("--************************************************--");
 			}
