@@ -33,7 +33,8 @@ public class Main {
 			QueryResult result = twitter.search(query);
 
 			relatorioTwitter.setQtdTweets(result.getTweets().size());
-			while (result.hasNext()){
+			boolean hasNext = false;
+			do{
 				for (Status status : result.getTweets()) {
 
 					LocalDateTime dataTweet = LocalDateTime.ofInstant(status.getCreatedAt().toInstant(),
@@ -42,8 +43,11 @@ public class Main {
 					relatorioTwitter.adicionarRetweetPorDia(dataTweet.getDayOfWeek(), status.getRetweetCount());
 					relatorioTwitter.adicionarFavPorDia(dataTweet.getDayOfWeek(), status.getFavoriteCount());
 				}
-				result = twitter.search(result.nextQuery());
-			} ;
+				hasNext = result.hasNext();
+				if(hasNext){
+					result = twitter.search(result.nextQuery());
+				}
+			}while (hasNext) ;
 
 			System.out.println("Hashtag buscada: " + hashtag);
 			System.out.println(
