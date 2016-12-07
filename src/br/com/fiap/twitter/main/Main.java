@@ -3,8 +3,11 @@ package br.com.fiap.twitter.main;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 import br.com.fiap.twitter.config.ConfiguraAcesso;
+import br.com.fiap.twitter.entidade.DadosTwitter;
 import br.com.fiap.twitter.entidade.RelatorioTwitter;
 import twitter4j.Query;
 import twitter4j.QueryResult;
@@ -21,6 +24,8 @@ public class Main {
 
 		DateTimeFormatter formatador = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
+		List<DadosTwitter> listaTwitter = new ArrayList<>();
+		
 		String hashtag = "#javaOne";
 
 		RelatorioTwitter relatorioTwitter = new RelatorioTwitter(hashtag);
@@ -42,6 +47,11 @@ public class Main {
 					relatorioTwitter.adicionarTweetPorDia(dataTweet.getDayOfWeek(), 1);
 					relatorioTwitter.adicionarRetweetPorDia(dataTweet.getDayOfWeek(), status.getRetweetCount());
 					relatorioTwitter.adicionarFavPorDia(dataTweet.getDayOfWeek(), status.getFavoriteCount());
+					
+					DadosTwitter dadosTwitter = new DadosTwitter(status.getUser().getId(), 
+							status.getUser().getScreenName(), status.getUser().getName(), dataTweet, status.getText());
+					listaTwitter.add(dadosTwitter);
+					
 				}
 				hasNext = result.hasNext();
 				if(hasNext){
@@ -51,11 +61,13 @@ public class Main {
 
 			System.out.println("Hashtag buscada: " + hashtag);
 			System.out.println(
-					"Data de parâmetro: " + dataInicial.format(formatador) + " até " + dataFinal.format(formatador));
+					"Data de parametro: " + dataInicial.format(formatador) + " ate " + dataFinal.format(formatador));
 			System.out.println("Tweets por dia de semana: " + relatorioTwitter.getQtdTweetDia().toString());
 			System.out.println("Retweets por dia de semana: " + relatorioTwitter.getQtdRetweetDia().toString());
-			System.out.println("Favoritações por dia de semana: " + relatorioTwitter.getQtdFavDia().toString());
-
+			System.out.println("Favoritacoes por dia de semana: " + relatorioTwitter.getQtdFavDia().toString());
+			System.out.println("*******************************************");
+			relatorioTwitter.ordenaEExibePrimeiroEUltimoNome(listaTwitter);
+			relatorioTwitter.ordenaEExibeDataMaisEMenosRecente(listaTwitter);
 		} catch (Exception e) {
 			System.out.println("Erro ao efetuar a busca!!!");
 			e.printStackTrace();

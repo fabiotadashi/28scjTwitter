@@ -6,54 +6,60 @@ public class DadosTwitter {
 	private long id;
 	private String autor;
 	private String nome;
-	private String sobrenome;
 	private LocalDateTime data;
-	private int qtdeRetweets;
-	private int qtdeFovoritacao;
+	private String mensagem;
+
+	public DadosTwitter(long id, String autor, String nome, LocalDateTime data, String mensagem) {
+		this.id = id;
+		this.autor = autor;
+		this.nome = nome;
+		this.data = data;
+		this.mensagem = mensagem;
+	}
+
 	public long getId() {
 		return id;
 	}
+
 	public void setId(long id) {
 		this.id = id;
 	}
+
 	public String getAutor() {
 		return autor;
 	}
+
 	public void setAutor(String autor) {
 		this.autor = autor;
 	}
+
 	public String getNome() {
 		return nome;
 	}
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public String getSobrenome() {
-		return sobrenome;
-	}
-	public void setSobrenome(String sobrenome) {
-		this.sobrenome = sobrenome;
-	}
+
 	public LocalDateTime getData() {
 		return data;
 	}
+
 	public void setData(LocalDateTime data) {
 		this.data = data;
 	}
-	public int getQtdeRetweets() {
-		return qtdeRetweets;
+
+	public String getMensagem() {
+		return mensagem;
 	}
-	public void setQtdeRetweets(int qtdeRetweets) {
-		this.qtdeRetweets = qtdeRetweets;
+
+	public void setMensagem(String mensagem) {
+		this.mensagem = mensagem;
 	}
-	public int getQtdeFovoritacao() {
-		return qtdeFovoritacao;
+
+	@Override
+	public String toString() {
+		return this.getId() + " - " + this.getAutor() + " - " + this.getNome()+" - "+this.getData();
 	}
-	public void setQtdeFovoritacao(int qtdeFovoritacao) {
-		this.qtdeFovoritacao = qtdeFovoritacao;
-	}
-	
-	
-	
 
 }
