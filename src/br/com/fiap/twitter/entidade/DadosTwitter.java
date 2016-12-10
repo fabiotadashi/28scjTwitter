@@ -2,6 +2,12 @@ package br.com.fiap.twitter.entidade;
 
 import java.time.LocalDateTime;
 
+
+/**
+ * @author Douglas
+ *
+ *	Classe que representa os dados (Status) do twitter
+ */
 public class DadosTwitter {
 	private long id;
 	private String autor;

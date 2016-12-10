@@ -1,6 +1,7 @@
 package br.com.fiap.twitter.entidade;
 
 import java.time.DayOfWeek;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +10,12 @@ import java.util.stream.Collectors;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 
+/**
+ * Classe que possui os dados para gerar os relatorios
+ * 
+ * @author FabioMiyasato
+ * 
+ */
 public class RelatorioTwitter {
 
 	private final String hashtag;
@@ -16,7 +23,15 @@ public class RelatorioTwitter {
 	private Map<DayOfWeek, Integer> qtdTweetDia = new HashMap<>();
 	private Map<DayOfWeek, Integer> qtdRetweetDia = new HashMap<>();
 	private Map<DayOfWeek, Integer> qtdFavDia = new HashMap<>();
-
+	private String primeiroNome;
+	private String ultimoNome;
+	private LocalDateTime primeiraData;
+	private LocalDateTime ultimaData;
+	
+	
+	/**
+	 * @param hashtag indica qual a hashtag que foram gerados os dados
+	 */
 	public RelatorioTwitter(String hashtag) {
 		this.hashtag = hashtag;
 	}
@@ -29,6 +44,14 @@ public class RelatorioTwitter {
 		this.qtdTotalTweets = qtdTweets;
 	}
 
+	
+	/**
+	 * Metodo que contabiliza tweets por dia de semana
+	 * 
+	 * @author FabioMiyasato
+	 * @param dayOfWeek Enum representado o dia da semana
+	 * @param qtd Quantidade de tweets a serem contabilizados neste dia
+	 */
 	public void adicionarTweetPorDia(DayOfWeek dayOfWeek, int qtd) {
 		if (getQtdTweetDia().get(dayOfWeek) != null) {
 			qtd += getQtdTweetDia().get(dayOfWeek);
@@ -36,10 +59,23 @@ public class RelatorioTwitter {
 		getQtdTweetDia().put(dayOfWeek, +qtd);
 	}
 
+	/**
+	 * Metodo retorna map com os tweets por dia de semana
+	 * 
+	 * @author FabioMiyasato
+	 * @return HashMap com os tweets por dia de semana
+	 */
 	public Map<DayOfWeek, Integer> getQtdTweetDia() {
 		return qtdTweetDia;
 	}
-
+	
+	/**
+	 * Metodo que contabiliza retweets por dia de semana
+	 * 
+	 * @author FabioMiyasato
+	 * @param dayOfWeek Enum representado o dia da semana
+	 * @param qtd Quantidade de retweets a serem contabilizados neste dia
+	 */
 	public void adicionarRetweetPorDia(DayOfWeek dayOfWeek, int qtd) {
 		if (getQtdRetweetDia().get(dayOfWeek) != null) {
 			qtd += getQtdRetweetDia().get(dayOfWeek);
@@ -47,10 +83,23 @@ public class RelatorioTwitter {
 		getQtdRetweetDia().put(dayOfWeek, +qtd);
 	}
 
+	/**
+	 * Metodo retorna map com os retweets por dia de semana
+	 * 
+	 * @author FabioMiyasato
+	 * @return HashMap com os retweets por dia de semana
+	 */
 	public Map<DayOfWeek, Integer> getQtdRetweetDia() {
 		return qtdRetweetDia;
 	}
 
+	/**
+	 * Metodo que contabiliza favoritacoes por dia de semana
+	 * 
+	 * @author FabioMiyasato
+	 * @param dayOfWeek Enum representado o dia da semana
+	 * @param qtd Quantidade de favoritacoes a serem contabilizados neste dia
+	 */
 	public void adicionarFavPorDia(DayOfWeek dayOfWeek, int qtd) {
 		if (getQtdFavDia().get(dayOfWeek) != null) {
 			qtd += getQtdFavDia().get(dayOfWeek);
@@ -58,31 +107,90 @@ public class RelatorioTwitter {
 		getQtdFavDia().put(dayOfWeek, +qtd);
 	}
 
+	/**
+	 * Metodo retorna map com as favoritacoes por dia de semana
+	 * 
+	 * @author FabioMiyasato
+	 * @return HashMap com as favoritacoes por dia de semana
+	 */
 	public Map<DayOfWeek, Integer> getQtdFavDia() {
 		return qtdFavDia;
 	}
 
+	/**
+	 * Metodo retorna map com as favoritacoes por dia de semana
+	 * 
+	 * @author FabioMiyasato
+	 * @return HashMap com as favoritacoes por dia de semana
+	 */
 	public void enviarRelatorio(Twitter twitter) throws TwitterException {
+//		String professorId = "@michelpf";
 		String professorId = "";
-		// descomentar o codigo abaixo quando tudo estiver ok
-		// professorId = "@michelpf"
 		twitter.updateStatus(professorId + " trabalho finalizado. - Tag: " + hashtag + ", qtd tweets: " + qtdTotalTweets
 				+ " na ultima semana. Github: fabiotadashi/28scjTwitter");
 	}
 
-	public void ordenaEExibePrimeiroEUltimoNome(List<DadosTwitter> listaTwitter) {
+	/**
+	 * Metodo que ordena lista por nome
+	 * 
+	 * @author Douglas
+	 * @param listaTwiter Lista a ser ordenada
+	 */
+	public void ordenarPorNome(List<DadosTwitter> listaTwitter) {
 		List<DadosTwitter> listaOrdenada = listaTwitter.stream()
 				.sorted((l1, l2) -> l1.getAutor().compareTo(l2.getAutor())).collect(Collectors.toList());
-		System.out.println("Primeiro Nome: " + listaOrdenada.get(0).getNome());
-		System.out.println("Ultimo Nome: " + listaOrdenada.get(listaOrdenada.size() - 1).getNome());
+		this.primeiroNome = listaOrdenada.get(0).getNome();
+		this.ultimoNome = listaOrdenada.get(listaOrdenada.size() - 1).getNome();
 	}
 
-	public void ordenaEExibeDataMaisEMenosRecente(List<DadosTwitter> listaTwitter) {
+	/**
+	 * Metodo que ordena lista por data
+	 * 
+	 * @author Douglas
+	 * @param listaTwiter Lista a ser ordenada
+	 */
+	public void ordenarPorData(List<DadosTwitter> listaTwitter) {
 		List<DadosTwitter> listaOrdenada = listaTwitter.stream()
 				.sorted((l1, l2) -> l2.getData().compareTo(l1.getData())).collect(Collectors.toList());
-		System.out.println("Data mais recente: " + listaOrdenada.get(0).getData());
-		System.out.println("Data menos recente: " + listaOrdenada.get(listaOrdenada.size() - 1).getData());
+		this.primeiraData = listaOrdenada.get(0).getData();
+		this.ultimaData = listaOrdenada.get(listaOrdenada.size() - 1).getData();
 
+	}
+
+	public String getPrimeiroNome() {
+		return primeiroNome;
+	}
+
+	public void setPrimeiroNome(String primeiroNome) {
+		this.primeiroNome = primeiroNome;
+	}
+
+	public String getUltimoNome() {
+		return ultimoNome;
+	}
+
+	public void setUltimoNome(String ultimoNome) {
+		this.ultimoNome = ultimoNome;
+	}
+
+	public LocalDateTime getPrimeiraData() {
+		return primeiraData;
+	}
+
+	public void setPrimeiraData(LocalDateTime primeiraData) {
+		this.primeiraData = primeiraData;
+	}
+
+	public LocalDateTime getUltimaData() {
+		return ultimaData;
+	}
+
+	public void setUltimaData(LocalDateTime ultimaData) {
+		this.ultimaData = ultimaData;
+	}
+
+	public String getHashtag() {
+		return hashtag;
 	}
 
 }
