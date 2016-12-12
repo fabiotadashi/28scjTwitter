@@ -118,14 +118,13 @@ public class RelatorioTwitter {
 	}
 
 	/**
-	 * Metodo retorna map com as favoritacoes por dia de semana
+	 * Metodo que envia relatorio avisando que o projeto foi finalizado
 	 * 
 	 * @author FabioMiyasato
-	 * @return HashMap com as favoritacoes por dia de semana
+	 * @param twitter Objeto twitter com conexao valida
 	 */
 	public void enviarRelatorio(Twitter twitter) throws TwitterException {
-//		String professorId = "@michelpf";
-		String professorId = "";
+		String professorId = "@michelpf";
 		twitter.updateStatus(professorId + " trabalho finalizado. - Tag: " + hashtag + ", qtd tweets: " + qtdTotalTweets
 				+ " na ultima semana. Github: fabiotadashi/28scjTwitter");
 	}
