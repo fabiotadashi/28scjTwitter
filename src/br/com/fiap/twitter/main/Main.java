@@ -80,6 +80,7 @@ public class Main {
 
 	private static void exibeRelatorio(LocalDateTime dataInicial, LocalDateTime dataFinal, DateTimeFormatter formatador,
 			RelatorioTwitter relatorioTwitter) {
+		System.out.println("*******************************************");
 		System.out.println("Hashtag buscada: " + relatorioTwitter.getHashtag());
 		System.out.println(
 				"Data de parametro: " + dataInicial.format(formatador) + " ate " + dataFinal.format(formatador));
