@@ -9,10 +9,11 @@ import twitter4j.conf.ConfigurationBuilder;
 
 public class ConfiguraAcesso {
 
-	private static final String consumerKey = "bFABArLLYy0dLJx5BsvfmOVa3";
-	private static final String consumerSecret = "qWHz3rd70g0RknFbtH32gMx6TjaTmvnMeNv2biwEObf516oWHp";
-	private static final String token = "790979536368332802-qKpjnOSeuZGt8tVHDvfxVttZ9aEPE0y";
-	private static final String tokenSecret = "P4dxf7kp0ApwkVAWxqf3lKfYqFHaNyvB4oGEDdp6X7cI1";
+  //Configurar credencias
+	private static final String consumerKey = "";
+	private static final String consumerSecret = "";
+	private static final String token = "";
+	private static final String tokenSecret = "";
 
 	/**
 	 * Metodo estatico que cria as configuracoes de acesso a API do twitter
