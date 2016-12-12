@@ -72,7 +72,7 @@ public class Main {
 			relatorioTwitter.enviarRelatorio(twitter);
 			
 		} catch (Exception e) {
-			System.out.println("Erro ao efetuar a busca!!!");
+			System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
 
