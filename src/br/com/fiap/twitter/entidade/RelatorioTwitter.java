@@ -137,9 +137,9 @@ public class RelatorioTwitter {
 	 */
 	public void ordenarPorNome(List<DadosTwitter> listaTwitter) {
 		List<DadosTwitter> listaOrdenada = listaTwitter.stream()
-				.sorted((l1, l2) -> l1.getNome().compareTo(l2.getNome())).collect(Collectors.toList());
-		this.primeiroNome = listaOrdenada.get(0).getNome();
-		this.ultimoNome = listaOrdenada.get(listaOrdenada.size() - 1).getNome();
+				.sorted((l1, l2) -> l1.getAutor().compareTo(l2.getAutor())).collect(Collectors.toList());
+		this.primeiroNome = listaOrdenada.get(0).getAutor();
+		this.ultimoNome = listaOrdenada.get(listaOrdenada.size() - 1).getAutor();
 	}
 
 	/**
